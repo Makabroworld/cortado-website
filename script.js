@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadBtn = document.getElementById('download-btn');
   if (downloadBtn) {
     downloadBtn.addEventListener('click', () => {
+      // window.va is installed by the Vercel Web Analytics script tag in
+      // index.html — guarded since it's only present once Analytics is
+      // enabled for this project in the Vercel dashboard.
+      if (typeof window.va === 'function') {
+        window.va('event', { name: 'download_click' });
+      }
       window.location.href = 'https://storage.googleapis.com/cortado-downloads/CortadoSetup.exe';
     });
   }
