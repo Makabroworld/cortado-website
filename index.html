@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cortado - Clean, focused video editing." />
+  <title>Download Cortado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  
+  <!-- Fixed Background Videos -->
+  <video class="bg-video" id="bg-video" muted playsinline preload="auto">
+    <source src="background.mp4" type="video/mp4" />
+  </video>
+  <video class="bg-video" id="bg-video-reversed" muted playsinline preload="auto" style="opacity: 0; transition: opacity 0.3s ease;">
+    <source src="background-reversed.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Overlay to ensure text readability -->
+  <div class="bg-overlay"></div>
+
+  <!-- Main Content Wrapper -->
+  <main class="content-wrapper">
+    
+    <!-- Hero Section (Download) -->
+    <section class="hero-section" id="hero">
+
+      <div class="hero-content fade-up-hero">
+        <h1 class="hero-title">Create without the clutter.</h1>
+        <p class="hero-subtitle">Cortado is a calm video editor for turning raw clips into polished vertical content. Fast cuts, effects, color, and export flow in one place.</p>
+        <button class="download-button" id="download-btn">
+          <span class="btn-text">Download for Windows</span>
+          <span class="btn-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </span>
+        </button>
+        <p class="system-req">Requires Windows 10 or later.</p>
+      </div>
+    </section>
+
+    <!-- Trailer Section -->
+    <section class="trailer-section" id="trailer-section">
+      <div class="trailer-content reveal-on-scroll">
+        <h2 class="trailer-title">See it in motion</h2>
+        <div class="video-container">
+          <video id="trailer-video" src="assets/cortado.mp4" poster="assets/cortado-poster.jpg" autoplay loop muted playsinline style="cursor: pointer;" title="Click to unmute/mute"></video>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer reveal-on-scroll">
+    <div class="footer-content">
+      <img class="footer-logo" src="assets/logo-real.png" alt="Cortado logo" />
+      <div class="footer-text">
+        <p>&copy; 2026 Cortado. All rights reserved.</p>
+        <a href="mailto:thecopolopo@gmail.com">Contact Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <div class="dot active" id="dot-1"></div>
+    <div class="dot" id="dot-2"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
