@@ -172,45 +172,101 @@
       <div class="info-content reveal-on-scroll">
         <h2 class="info-title parallax-text">What early users are saying</h2>
         <p class="info-lead parallax-text">Placeholder reviews for now — real ones go here as they come in.</p>
-        <div class="review-grid">
-          <div class="review-card parallax-text">
-            <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-            <p class="review-quote">“Cutting silences used to be the most tedious part of editing. Now I just ask for it.”</p>
-            <div class="review-author">
-              <span class="review-avatar avatar-1">JM</span>
-              <span class="review-name">Jordan M.</span>
+        <!-- Horizontal looping marquee, not a static grid: the track below
+             holds the 5 review cards TWICE back to back, animated with a
+             CSS keyframe that translates it left by exactly 50% of its own
+             width (== the width of one full set) and repeats -- so the
+             instant it finishes sliding the first set fully offscreen, the
+             second (identical) set is sitting exactly where the first one
+             started, and the loop reads as seamless/endless instead of
+             snapping back. The duplicate set is aria-hidden so screen
+             readers only hear the reviews once. -->
+        <div class="review-marquee reveal-on-scroll">
+          <div class="review-track">
+            <div class="review-card parallax-text">
+              <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+              <p class="review-quote">“Cutting silences used to be the most tedious part of editing. Now I just ask for it.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-1">JM</span>
+                <span class="review-name">Jordan M.</span>
+              </div>
             </div>
-          </div>
-          <div class="review-card parallax-text">
-            <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-            <p class="review-quote">“The timeline is exactly as deep as I need it and never gets in my way.”</p>
-            <div class="review-author">
-              <span class="review-avatar avatar-2">SK</span>
-              <span class="review-name">Sam K.</span>
+            <div class="review-card parallax-text">
+              <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+              <p class="review-quote">“The timeline is exactly as deep as I need it and never gets in my way.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-2">SK</span>
+                <span class="review-name">Sam K.</span>
+              </div>
             </div>
-          </div>
-          <div class="review-card parallax-text">
-            <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-            <p class="review-quote">“Word-level captions saved me hours compared to my old workflow.”</p>
-            <div class="review-author">
-              <span class="review-avatar avatar-3">PR</span>
-              <span class="review-name">Priya R.</span>
+            <div class="review-card parallax-text">
+              <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+              <p class="review-quote">“Word-level captions saved me hours compared to my old workflow.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-3">PR</span>
+                <span class="review-name">Priya R.</span>
+              </div>
             </div>
-          </div>
-          <div class="review-card parallax-text">
-            <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-            <p class="review-quote">“Exports finish way faster than I expected for how much is happening on the timeline.”</p>
-            <div class="review-author">
-              <span class="review-avatar avatar-4">AT</span>
-              <span class="review-name">Alex T.</span>
+            <div class="review-card parallax-text">
+              <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+              <p class="review-quote">“Exports finish way faster than I expected for how much is happening on the timeline.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-4">AT</span>
+                <span class="review-name">Alex T.</span>
+              </div>
             </div>
-          </div>
-          <div class="review-card parallax-text">
-            <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-            <p class="review-quote">“Everything stays on my own machine, which matters a lot for client footage.”</p>
-            <div class="review-author">
-              <span class="review-avatar avatar-5">CB</span>
-              <span class="review-name">Chris B.</span>
+            <div class="review-card parallax-text">
+              <div class="review-stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+              <p class="review-quote">“Everything stays on my own machine, which matters a lot for client footage.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-5">CB</span>
+                <span class="review-name">Chris B.</span>
+              </div>
+            </div>
+            <!-- Duplicate set for the seamless loop -- identical markup,
+                 hidden from assistive tech and not a separate parallax
+                 target (the loop keeps it constantly re-entering/leaving
+                 the viewport, which would fight with per-element parallax
+                 offsets meant for something that stays roughly put). -->
+            <div class="review-card" aria-hidden="true">
+              <div class="review-stars"><span>★★★★★</span></div>
+              <p class="review-quote">“Cutting silences used to be the most tedious part of editing. Now I just ask for it.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-1">JM</span>
+                <span class="review-name">Jordan M.</span>
+              </div>
+            </div>
+            <div class="review-card" aria-hidden="true">
+              <div class="review-stars"><span>★★★★★</span></div>
+              <p class="review-quote">“The timeline is exactly as deep as I need it and never gets in my way.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-2">SK</span>
+                <span class="review-name">Sam K.</span>
+              </div>
+            </div>
+            <div class="review-card" aria-hidden="true">
+              <div class="review-stars"><span>★★★★★</span></div>
+              <p class="review-quote">“Word-level captions saved me hours compared to my old workflow.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-3">PR</span>
+                <span class="review-name">Priya R.</span>
+              </div>
+            </div>
+            <div class="review-card" aria-hidden="true">
+              <div class="review-stars"><span>★★★★★</span></div>
+              <p class="review-quote">“Exports finish way faster than I expected for how much is happening on the timeline.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-4">AT</span>
+                <span class="review-name">Alex T.</span>
+              </div>
+            </div>
+            <div class="review-card" aria-hidden="true">
+              <div class="review-stars"><span>★★★★★</span></div>
+              <p class="review-quote">“Everything stays on my own machine, which matters a lot for client footage.”</p>
+              <div class="review-author">
+                <span class="review-avatar avatar-5">CB</span>
+                <span class="review-name">Chris B.</span>
+              </div>
             </div>
           </div>
         </div>

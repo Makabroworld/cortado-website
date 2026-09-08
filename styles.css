@@ -294,14 +294,41 @@ body, html {
 /* Reviews — placeholder testimonials (see the HTML comment above the
    markup for why these are deliberately generic). Reuses .info-section /
    .info-content for the same padding and centering as the features/FAQ
-   block above it. */
-.review-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+   block above it.
+
+   A horizontal, endlessly looping marquee rather than a static grid: see
+   the HTML comment above .review-track for how the loop itself works
+   (translate exactly -50% of a doubled track). .review-marquee is the
+   fixed-width viewport that clips the track and fades its edges;
+   .review-track is the thing that actually moves. */
+.review-marquee {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.review-track {
+  display: flex;
   gap: 1.25rem;
+  width: max-content;
+  animation: review-scroll 36s linear infinite;
+}
+
+/* Pausing on hover (rather than on the whole page's mouse position) means
+   moving between cards to actually read one doesn't fight the scroll --
+   the instant the cursor is over the track at all, it holds still. */
+.review-marquee:hover .review-track {
+  animation-play-state: paused;
+}
+
+@keyframes review-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .review-card {
+  flex: 0 0 280px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
@@ -309,6 +336,12 @@ body, html {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-track {
+    animation: none;
+  }
 }
 
 .review-stars {
