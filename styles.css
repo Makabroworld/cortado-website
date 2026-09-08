@@ -336,6 +336,40 @@ body, html {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  transition: scale 0.2s ease, border-color 0.2s ease, background-color 0.2s ease,
+              box-shadow 0.25s ease;
+}
+
+/* Hover: highlight + a quick jiggle. `scale`/`rotate` are the same
+   standalone-property trick as .parallax-text above -- they compose with
+   that element's own JS-driven `translate` instead of fighting it, so a
+   card mid-drift from the scroll parallax still jiggles correctly instead
+   of the hover effect just silently not applying. The jiggle itself
+   (card-jiggle) is a short one-shot -- it plays once when the cursor
+   arrives and settles, rather than wiggling for as long as the card stays
+   hovered, which read as far more "are you having a stroke" than
+   "jiggle" in an earlier pass with a looping animation. */
+.review-card:hover {
+  scale: 1.045;
+  border-color: var(--color-primary);
+  background-color: rgba(255, 106, 26, 0.08);
+  box-shadow: 0 14px 32px rgba(255, 106, 26, 0.28);
+  animation: card-jiggle 0.45s ease-in-out;
+}
+
+@keyframes card-jiggle {
+  0%   { rotate: 0deg; }
+  20%  { rotate: -3deg; }
+  40%  { rotate: 3deg; }
+  60%  { rotate: -1.8deg; }
+  80%  { rotate: 1.2deg; }
+  100% { rotate: 0deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-card:hover {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -398,8 +432,17 @@ body, html {
    parent's. The transition here just smooths between animation-frame
    updates so the motion reads as a drift, not a stutter. */
 .parallax-text {
-  transition: transform 0.12s linear;
-  will-change: transform;
+  /* Uses the standalone `translate` property (not `transform`) precisely
+     so it can coexist with a hover effect on the SAME element (see
+     .review-card:hover below): `translate`/`rotate`/`scale` are three
+     independent CSS properties that the browser composes together
+     automatically, unlike `transform`, where a JS-set inline
+     `style.transform` would outrank -- and silently kill -- any `:hover`
+     rule trying to set `transform` too (inline style beats a stylesheet
+     rule at equal-or-higher specificity, hover or not). script.js sets
+     `el.style.translate` for exactly this reason. */
+  transition: translate 0.12s linear;
+  will-change: translate;
 }
 
 /* Footer */

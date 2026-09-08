@@ -155,8 +155,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // without the clamp, an element far from center (still just
         // offscreen) would jump by a very visible amount the moment it
         // enters view.
-        const translate = Math.max(-16, Math.min(16, offset * -0.04));
-        el.style.transform = `translateY(${translate.toFixed(2)}px)`;
+        const translateY = Math.max(-16, Math.min(16, offset * -0.04));
+        // The standalone `translate` property, not `transform` -- so a
+        // review card's own :hover jiggle (which uses `rotate`/`scale`,
+        // see styles.css) composes with this instead of getting silently
+        // overridden by it. An inline style.transform would outrank any
+        // stylesheet `transform` rule regardless of :hover; translate/
+        // rotate/scale are three separate properties the browser combines
+        // on its own, so there's nothing to outrank.
+        el.style.translate = `0 ${translateY.toFixed(2)}px`;
       });
     };
 
