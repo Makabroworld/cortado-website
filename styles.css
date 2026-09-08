@@ -291,6 +291,84 @@ body, html {
   }
 }
 
+/* Reviews — placeholder testimonials (see the HTML comment above the
+   markup for why these are deliberately generic). Reuses .info-section /
+   .info-content for the same padding and centering as the features/FAQ
+   block above it. */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.review-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.review-stars {
+  color: var(--color-primary);
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+}
+
+.review-quote {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.review-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-light);
+  flex-shrink: 0;
+}
+
+.avatar-1 { background: #ff6a1a; }
+.avatar-2 { background: #c96a4e; }
+.avatar-3 { background: #d9822b; }
+.avatar-4 { background: #b5533c; }
+.avatar-5 { background: #e0a458; }
+
+.review-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-light);
+}
+
+/* Scroll-linked parallax — a small, continuous per-element drift driven by
+   scroll position (see script.js's updateParallax), layered on top of the
+   one-time .reveal-on-scroll fade-in that the PARENT container already
+   does. The two don't fight: reveal-on-scroll's transform lives on the
+   outer .info-content/.reviews-content wrapper, this lives on the inner
+   text elements, and a child's own transform is independent of its
+   parent's. The transition here just smooths between animation-frame
+   updates so the motion reads as a drift, not a stutter. */
+.parallax-text {
+  transition: transform 0.12s linear;
+  will-change: transform;
+}
+
 /* Footer */
 .site-footer {
   position: relative;

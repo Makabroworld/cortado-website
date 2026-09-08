@@ -130,6 +130,45 @@ document.addEventListener('DOMContentLoaded', () => {
     else bgVideoRev.addEventListener('loadedmetadata', checkLoaded);
   }
 
+  // Subtle scroll-linked parallax on text blocks -- offsets each
+  // .parallax-text element vertically by a small fraction of its own
+  // distance from the viewport's vertical center, so text drifts gently
+  // as the page scrolls rather than sitting static. Distinct from
+  // .reveal-on-scroll above: that's a one-time fade-in fired once by
+  // IntersectionObserver, this recomputes continuously on every scroll
+  // frame. content-wrapper fills the whole viewport (height:100vh), so
+  // getBoundingClientRect()'s viewport-relative coordinates already line
+  // up with it directly -- no extra offset math needed.
+  const parallaxEls = Array.from(document.querySelectorAll('.parallax-text'));
+  if (parallaxEls.length) {
+    const scrollRoot = document.querySelector('.content-wrapper');
+    let parallaxRaf = null;
+
+    const updateParallax = () => {
+      parallaxRaf = null;
+      const viewportCenter = window.innerHeight / 2;
+      parallaxEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const elCenter = rect.top + rect.height / 2;
+        const offset = elCenter - viewportCenter;
+        // Small factor + a tight clamp is what keeps this "slight" --
+        // without the clamp, an element far from center (still just
+        // offscreen) would jump by a very visible amount the moment it
+        // enters view.
+        const translate = Math.max(-16, Math.min(16, offset * -0.04));
+        el.style.transform = `translateY(${translate.toFixed(2)}px)`;
+      });
+    };
+
+    const requestParallax = () => {
+      if (parallaxRaf === null) parallaxRaf = requestAnimationFrame(updateParallax);
+    };
+
+    if (scrollRoot) scrollRoot.addEventListener('scroll', requestParallax, { passive: true });
+    window.addEventListener('resize', requestParallax);
+    requestParallax();
+  }
+
   // Click to unmute trailer video
   const trailerVideo = document.getElementById('trailer-video');
   if (trailerVideo) {
