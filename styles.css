@@ -306,6 +306,19 @@ body, html {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  /* overflow:hidden clips to this box's PADDING edge, and with zero
+     padding that edge sat flush against the cards themselves -- so the
+     hover scale (1.045) and its box-shadow had nowhere to grow into and
+     got sliced off top and bottom ("an invisible wall"). Padding here
+     gives that growth room inside the still-clipped box (bottom gets more
+     than top since the hover box-shadow's own vertical offset pushes its
+     reach further down than up). The matching negative margin cancels the
+     padding back out for LAYOUT purposes only -- margin is outside the
+     clipped box entirely, so it doesn't reduce the breathing room, it just
+     stops the extra padding from pushing the heading above and the
+     features section below further apart than they were. */
+  padding: 28px 0 56px;
+  margin: -28px 0 -56px;
 }
 
 .review-track {
